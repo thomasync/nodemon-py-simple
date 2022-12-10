@@ -14,10 +14,10 @@ def execute_process(args) -> None:
      # Kill the specified process, if specified
     if args.kill and process:
         process.kill()
+        process.wait()
 
     # Execute the process
     process = subprocess.Popen(args.exec, shell=True)
-
 
 def main():
     # Define the command line arguments and options
