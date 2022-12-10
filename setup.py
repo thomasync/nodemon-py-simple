@@ -8,7 +8,7 @@ setuptools.setup(
     description="Nodemon like for python, very simple and without dependencies",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
-    download_url="https://github.com/thomasync/nodemon-py-simple/archive/refs/tags/0.0.4.tar.gz",
+    download_url="https://github.com/thomasync/nodemon-py-simple/archive/refs/tags/0.0.5.tar.gz",
     author="thomasync",
     url="https://github.com/thomasync/nodemon-py-simple",
     keywords="python, nodemon, simple, watch, file, change, execute, command",
