@@ -9,6 +9,6 @@ setup(
     download_url="https://github.com/thomasync/nodemon-py-simple/archive/refs/tags/0.0.1.tar.gz",
     scripts=["nodemon-py-simple/main.py"],
     author="thomasync",
-    url="https://github.com/thomasync/nodemon-py-simple.git",
+    url="https://github.com/thomasync/nodemon-py-simple",
     keywords="python, nodemon, simple, watch, file, change, execute, command",
 )
