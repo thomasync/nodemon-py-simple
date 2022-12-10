@@ -3,7 +3,7 @@ import setuptools
 setuptools.setup(
     name="nodemon-py-simple",
     packages=setuptools.find_packages(),
-    version="0.0.4",
+    version="0.0.5",
     license='MIT',
     description="Nodemon like for python, very simple and without dependencies",
     long_description=open("README.md").read(),
