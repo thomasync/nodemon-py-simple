@@ -3,10 +3,9 @@ import time
 import subprocess
 import argparse
 
-args = {}
 process = None
 
-def execute_process() -> None:
+def execute_process(args) -> None:
     global process
     # Clear the console, if specified
     if args.clear:
@@ -21,6 +20,15 @@ def execute_process() -> None:
 
 
 def main():
+    # Define the command line arguments and options
+    parser = argparse.ArgumentParser(description="Watch a directory for file changes and execute a command")
+    parser.add_argument("directory", help="The directory to watch")
+    parser.add_argument("-e", "--extensions", help="A list of file extensions to watch, separated by commas")
+    parser.add_argument("-k", "--kill", help="The process name of the process to kill when a file is modified or added", action="store_true")
+    parser.add_argument("-c", "--clear", help="Clear the console before executing the command", action="store_true")
+    parser.add_argument("exec", help="The command to execute when a file is modified or added")
+    args = parser.parse_args()
+
     last_modified = {}
 
     # Traverse the directory and its subdirectories to find all existing files
@@ -34,7 +42,7 @@ def main():
             last_modified[path] = os.path.getmtime(path)
 
     # Execute the process once to start the process
-    execute_process()
+    execute_process(args)
 
     # Loop indefinitely to watch for file changes
     while True:
@@ -54,7 +62,7 @@ def main():
                         last_modified[path] = os.path.getmtime(path)
 
                         # Execute the process
-                        execute_process()
+                        execute_process(args)
 
                     # Check if the file has been modified
                     elif os.path.getmtime(path) != last_modified[path]:
@@ -62,21 +70,12 @@ def main():
                         last_modified[path] = os.path.getmtime(path)
 
                         # Execute the process
-                        execute_process()
+                        execute_process(args)
 
             time.sleep(1)
 
         except KeyboardInterrupt:
             break
 
-if __name__ == "__main__":
-    # Define the command line arguments and options
-    parser = argparse.ArgumentParser(description="Watch a directory for file changes and execute a command")
-    parser.add_argument("directory", help="The directory to watch")
-    parser.add_argument("-e", "--extensions", help="A list of file extensions to watch, separated by commas")
-    parser.add_argument("-k", "--kill", help="The process name of the process to kill when a file is modified or added", action="store_true")
-    parser.add_argument("-c", "--clear", help="Clear the console before executing the command", action="store_true")
-    parser.add_argument("exec", help="The command to execute when a file is modified or added")
-    args = parser.parse_args()
-    
+if __name__ == "__main__":   
     main()
