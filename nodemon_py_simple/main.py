@@ -16,17 +16,25 @@ def execute_process(args) -> None:
         process.kill()
         process.wait()
 
+    if args.modified_time and process:
+        current_time = time.time()
+        os.utime(args.modified_time, (current_time, current_time))
+        return
+
     # Execute the process
     process = subprocess.Popen(args.exec, shell=True)
 
 def main():
     # Define the command line arguments and options
     parser = argparse.ArgumentParser(description="Watch a directory for file changes and execute a command")
+    parser.add_argument("-v", "--version", action="version", version="nodemon-py-simple 0.0.7")
     parser.add_argument("directory", help="The directory to watch")
     parser.add_argument("-e", "--extensions", help="A list of file extensions to watch, separated by commas")
     parser.add_argument("-k", "--kill", help="The process name of the process to kill when a file is modified or added", action="store_true")
+    parser.add_argument("-m", "--modified-time", help="Update modified time of the file (useful for serverless like mitmproxy)")
     parser.add_argument("-c", "--clear", help="Clear the console before executing the command", action="store_true")
     parser.add_argument("exec", help="The command to execute when a file is modified or added")
+
     args = parser.parse_args()
 
     last_modified = {}

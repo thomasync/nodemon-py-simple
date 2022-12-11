@@ -25,8 +25,8 @@ The available options are as follows:
 
 - `-e`, `--extensions`: a list of file extensions to watch, separated by commas
 - `-k`, `--kill`: the process name of the process to kill when a file is modified or added
+- `-m`, `--modified-time`: update modified time of the file (like modd)
 - `-c`, `--clear`: clear the console before executing the command
-- `--exec`: the command to execute when a file is modified or added
 
 # Contributing
 
